@@ -37,6 +37,19 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 }
 ```
 
+- SAM'S FIX: At the end, when using the `dog.test.js` file, I received the error  "Cannot find module '@babel/preset-env'." To fix this, I did the following:
+
+1. Run `yarn add @babel/preset-env --dev` in the terminal
+
+2. Changed the `.babelrc` file from the above to:
+```json
+{
+  "presets": [
+    "@babel/preset-env"
+  ]
+}
+```
+
 🏁 `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](#the-es6-modules-syntax) section of this chapter.
 
 ## ES6
@@ -203,6 +216,21 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
   "presets": [
     "env",
     "flow"
+  ]
+}
+```
+
+- SAM'S FIX: Again, the `dog.test.js` file gave an error saying "Cannot find module '@babel/preset-flow'." To fix this, I did the following:
+
+1. Run `yarn add --dev @babel/preset-flow` in the terminal.
+
+2. Change the `.babelrc` file from the above to:
+
+```json
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-flow"
   ]
 }
 ```
