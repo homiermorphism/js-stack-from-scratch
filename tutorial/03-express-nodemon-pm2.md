@@ -144,12 +144,11 @@ Anyway, back to business!
 
 After trying several things, the one that finally worked was creating a bridge between versions 6 and 7 by running `yarn add babel-core@7.0.0-bridge.0.`
 
-:bangbang: I then got the error:
+I then got the error:
 
->/bin/sh: babel-node: command not found
-error Command failed with exit code 127.
+>/bin/sh: babel-node: command not found error
 
-To fix this I ran `yarn add @babel/node`. Now everything works! 
+To fix this I ran `yarn add @babel/node`. Now everything works! :bangbang:
 
 ## Nodemon
 
