@@ -138,6 +138,19 @@ Anyway, back to business!
 
 **Note**: Some processes – typically processes that wait for things to happen, like a server for instance – will prevent you from entering commands in your terminal until they're done. To interrupt such processes and get your prompt back, press **Ctrl+C**. You can alternatively open a new terminal tab if you want to keep them running while being able to enter commands. You can also make these processes run in the background but that's out of the scope of this tutorial.
 
+:bangbang: **SAM'S FIX:** At this point, I received the following error:
+
+>Error: Requires Babel "^7.0.0-0", but was loaded with "6.26.3". If you are sure you have a compatible version of @babel/core, it is likely that something in your build process is loading the wrong version. Inspect the stack trace of this error to look for the first entry that doesn't mention "@babel/core" or "babel-core" to see what is calling Babel.
+
+After trying several things, the one that finally worked was creating a bridge between versions 6 and 7 by running `yarn add babel-core@7.0.0-bridge.0.`
+
+:bangbang: I then got the error:
+
+>/bin/sh: babel-node: command not found
+error Command failed with exit code 127.
+
+To fix this I ran `yarn add @babel/node`. Now everything works! 
+
 ## Nodemon
 
 > 💡 **[Nodemon](https://nodemon.io/)** is a utility to automatically restart your Node server when file changes happen in the directory.
