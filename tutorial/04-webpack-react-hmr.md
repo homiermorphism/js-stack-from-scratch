@@ -17,15 +17,15 @@ export const APP_CONTAINER_CLASS = 'js-app'
 export const APP_CONTAINER_SELECTOR = `.${APP_CONTAINER_CLASS}`
 ```
 
-- Create an `src/client/index.js` file containing:
+- ~~Create an `src/client/index.js` file containing:~~
 
-~~```js
+```js
 import 'babel-polyfill'
 
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
 
 document.querySelector(APP_CONTAINER_SELECTOR).innerHTML = '<h1>Hello Webpack!</h1>'
-```~~
+```
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) before anything else in your bundle.
 
