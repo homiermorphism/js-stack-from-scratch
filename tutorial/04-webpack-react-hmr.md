@@ -181,7 +181,9 @@ Good job, I know this was quite dense. You deserve a break! The next section is 
 
 **Note**: I would recommend to have at least 3 terminals open, one for your Express server, one for the Webpack Dev Server, and one for Git, tests, and general commands like installing packages with `yarn`. Ideally, you should split your terminal screen in multiple panes to see them all.
 
-:bangbang: **ERROR:** Right now, live reloading does not work. The page just crashes when editing `client/index.js`. :bangbang:
+:bangbang: **ERROR:** Right now, live reloading does not work. The page just crashes when editing `client/index.js`.
+
+Hot Module Relacement (below) fixed the issued.:bangbang:
 
 ## React
 
@@ -223,9 +225,9 @@ export default App
 
 Since we use the JSX syntax here, we have to tell Babel that it needs to transform it with the ~~`babel-preset-react`~~ :bangbang: `@babel/preset-react` :bangbang: preset. And while we're at it, we're also going to add a Babel plugin called `flow-react-proptypes` which automatically generates PropTypes from Flow annotations for your React components.
 
-- ~~ Run `yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes`~~
+- ~~Run `yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes`~~
 
-- :bangbang: Run `yarn add --dev @babel/preset-react babel-plugin-react-proptypes` :bangbang: and edit your `.babelrc` file like so:
+- :bangbang: Run `yarn add --dev @babel/preset-react babel-plugin-flow-react-proptypes` :bangbang: and edit your `.babelrc` file like so:
 
 :bangbang: __the following is not from the original tutorial__
 ```json
@@ -246,7 +248,9 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 
 Now try changing the text in `src/client/app.jsx` to something else. Webpack Dev Server should reload the page automatically, which is pretty neat, but we are going to make it even better.
 
-:bangbang: Now nothing happens when editing `src/client/app.jsx`. The page does not reload or crash. :bangbang:
+:bangbang: Now nothing happens when editing `src/client/app.jsx`. The page does not reload or crash.
+
+Hot Module Relacement (below) fixed the issued.:bangbang:
 
 ## Hot Module Replacement
 
@@ -319,6 +323,8 @@ if (module.hot) {
 We need to make our `App` a child of `react-hot-loader`'s `AppContainer`, and we need to `require` the next version of our `App` when hot-reloading. To make this  process clean and DRY, we create a little `wrapApp` function that we use in both places it needs to render `App`. Feel free to move the `eslint-disable global-require` to the top of the file to make this more readable.
 
 🏁 Restart your `yarn dev:wds` process if it was still running. Open `localhost:8000`. In the Console tab, you should see some logs about HMR. Go ahead and change something in `src/client/app.jsx` and your changes should be reflected in your browser after a few seconds, without any full-page reload!
+
+:bangbang: Everything works! :bangbang:
 
 Next section: [05 - Redux, Immutable, Fetch](05-redux-immutable-fetch.md#readme)
 
