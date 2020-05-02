@@ -41,8 +41,8 @@ import 'babel-polyfill'
 ```
 in the `src/client/index.js` file, use the following:
 ```js
-import "core-js/stable"
-import "regenerator-runtime/runtime"
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 ```
 
 Now run `yarn add core-js` and `yarn add regenerator-runtime`. :bangbang:
@@ -100,9 +100,13 @@ This file is used to describe how our bundle should be assembled: `entry` is the
 
 `babel-loader` is a plugin for Webpack that transpiles your code just like we've been doing since the beginning of this tutorial. The only difference is that this time, the code will end up running in the browser instead of your server.
 
-- Run `yarn add --dev webpack webpack-dev-server babel-core babel-loader`
+:bangbang: **SAM'S FIX:**
 
-`babel-core` is a peer-dependency of `babel-loader`, so we installed it as well.
+- ~~Run `yarn add --dev webpack webpack-dev-server babel-core babel-loader`~~
+
+- Run `yarn add --dev webpack webpack-dev-server webpack-cli babel-loader`
+
+~~`babel-core` is a peer-dependency of `babel-loader`, so we installed it as well.~~ We loaded `@babel/core` in an earlier fix. Loading `babel-core` will load an old version. :bangbang:
 
 - Add `/dist/` to your `.gitignore`
 
@@ -162,7 +166,7 @@ Depending on the environment we're in, we'll include either the Webpack Dev Serv
 
 ```js
 console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
-  '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
+  '(development).\nKeep "yarn dev:wds" running in another terminal'}.`)
 ```
 
 That will give other developers a hint about what to do if they try to just run `yarn start` without Webpack Dev Server.
@@ -176,6 +180,8 @@ Alright that was a lot of changes, let's see if everything works as expected:
 Good job, I know this was quite dense. You deserve a break! The next section is easier.
 
 **Note**: I would recommend to have at least 3 terminals open, one for your Express server, one for the Webpack Dev Server, and one for Git, tests, and general commands like installing packages with `yarn`. Ideally, you should split your terminal screen in multiple panes to see them all.
+
+:bangbang: **ERROR:** Right now, live reloading does not work. The page just crashes when editing `client/index.js`. :bangbang:
 
 ## React
 
@@ -215,11 +221,11 @@ const App = () => <h1>Hello React!</h1>
 export default App
 ```
 
-Since we use the JSX syntax here, we have to tell Babel that it needs to transform it with the `babel-preset-react` preset. And while we're at it, we're also going to add a Babel plugin called `flow-react-proptypes` which automatically generates PropTypes from Flow annotations for your React components.
+Since we use the JSX syntax here, we have to tell Babel that it needs to transform it with the ~~`babel-preset-react`~~ :bangbang: `@babel/preset-react` :bangbang: preset. And while we're at it, we're also going to add a Babel plugin called `flow-react-proptypes` which automatically generates PropTypes from Flow annotations for your React components.
 
-- Run `yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes` and edit your `.babelrc` file like so:
+- Run ~~`yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes`~~ :bangbang: `yarn add --dev @babel/preset-react babel-plugin-react-proptypes` :bangbang: and edit your `.babelrc` file like so:
 
-```json
+~~```json
 {
   "presets": [
     "env",
@@ -230,11 +236,28 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
     "flow-react-proptypes"
   ]
 }
+```~~
+
+:bangbang: **SAM'S FIX:**
+```json
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-flow",
+    "@babel/react"
+  ],
+  "plugins": [
+    "flow-react-proptypes"
+  ]
+}
 ```
+:bangbang:
 
 🏁 Run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Hello React!".
 
 Now try changing the text in `src/client/app.jsx` to something else. Webpack Dev Server should reload the page automatically, which is pretty neat, but we are going to make it even better.
+
+:bangbang: Now nothing happens when editing `src/client/app.jsx`. The page does not reload or crash. :bangbang:
 
 ## Hot Module Replacement
 
