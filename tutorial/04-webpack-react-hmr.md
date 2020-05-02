@@ -258,7 +258,9 @@ Hot Module Relacement (below) fixed the issued.:bangbang:
 
 To make HMR work with React, we are going to need to tweak a few things.
 
-- Run `yarn add react-hot-loader@next`
+- ~~Run `yarn add react-hot-loader@next`~~
+
+- :bangbang: Run `yarn add react-hot-loader` :bangbang:
 
 - Edit your `webpack.config.babel.js` like so:
 
